@@ -6,7 +6,7 @@ import streamlit as st
 
 chart = StreamlitChart(width=1099, height=498)  # Set the desired width and height
 
-df = pd.read_csv('./data/ohlcv.csv')
+df = pd.read_csv('ohlcv.csv')
 # Columns: time | open | high | low | close | volume
 # Convert the 'timestamp' column to a datetime object
 # df['timestamp'] = pd.to_datetime(df['timestamp'])
