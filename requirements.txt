@@ -1,0 +1,3 @@
+lightweight_charts
+pandas
+streamlit
