@@ -1,3 +1,3 @@
-lightweight-charts
+git+https://github.com/louisnw01/lightweight-charts-python
 pandas
 streamlit
