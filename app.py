@@ -1,60 +1,56 @@
-
 import pandas as pd
 from lightweight_charts.widgets import StreamlitChart
-from datetime import datetime, timezone, timedelta
 import streamlit as st
-
-chart = StreamlitChart(width=1099, height=498)  # Set the desired width and height
-
-df = pd.read_csv('ohlcv.csv')
-# Columns: time | open | high | low | close | volume
-# Convert the 'timestamp' column to a datetime object
-# df['timestamp'] = pd.to_datetime(df['timestamp'])
-# Rename columns to match lightweight-charts requirements
-df = df.rename(columns={'timestamp': 'time', 'open': 'open', 'high': 'high', 'low': 'low', 'close': 'close', 'volume': 'volume'})
-# Convert the 'time' column to a datetime object
-df['time'] = pd.to_datetime(df['time'])
-# Convert the 'time' column to UTC by subtracting the UTC offset (5 hours and 30 minutes)
-df['time'] = df['time'] + timedelta(hours=5, minutes=30)
-
-
-chart.set(df)
-
-
+import yfinance as yf
 
 # Set Streamlit page configuration to full width
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
-# Add the CSS code to hide the deploy button
-st.markdown("""
-  <style>
-    .stDeployButton {
-      display: none;
-    }
-  </style>
-""", unsafe_allow_html=True)
+st.sidebar.header("Financial Chart")
 
+# Input for selecting a stock symbol
+ticker = st.sidebar.text_input("Stock Symbol (e.g., AAPL)", value="AAPL").upper()
 
+# Date range selection
+start_date = st.sidebar.date_input("Start Date", pd.to_datetime("2022-01-01"))
+end_date = st.sidebar.date_input("End Date", pd.to_datetime("2022-12-31"))
 
-# Add a centered div around the chart
-st.markdown(
-    """
-    <div style="display: flex; justify-content: center;">
-      <div class="centered-chart">
-    """,
-    unsafe_allow_html=True,  # Allow raw HTML to be rendered
-)
+# Fetch data from Yahoo Finance
+data = yf.download(ticker, start=start_date, end=end_date)
 
-# Load and display the chart
-chart.load()
+# Check if data is empty
+if data.empty:
+    st.error("No data available for the selected stock and date range.")
+else:
+    st.success(f"Data loaded for {ticker} from {start_date} to {end_date}.")
 
-# Close the centered div
-st.markdown(
-    """
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,  # Allow raw HTML to be rendered
-)
+    # Create a StreamlitChart element
+    chart = StreamlitChart(width=1099, height=498)
 
+    # Set the chart data
+    chart.set(data)
 
+    # Load and display the chart
+    chart.load()
+
+    # Add a button to make the chart fullscreen
+    if st.button("Fullscreen Chart"):
+        # Add CSS to target the iframe with data-testid="stIFrame" and apply a class
+        st.markdown("""
+        <style>
+        iframe[data-testid="stIFrame"] {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            z-index: 999999;
+        }
+        </style>
+        """, unsafe_allow_html=True)
