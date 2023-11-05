@@ -25,10 +25,14 @@ else:
     st.success(f"Data loaded for {ticker} from {start_date} to {end_date}.")
 
     # Create a StreamlitChart element
-    chart = StreamlitChart(width=1099, height=498)
+    chart = StreamlitChart(width=1099, height=498, toolbox=True)
 
     # Set the chart data
     chart.set(data)
+
+    #watrmark
+    chart.watermark(ticker)
+
 
     # Load and display the chart
     chart.load()
