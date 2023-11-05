@@ -12,11 +12,14 @@ st.sidebar.header("Financial Chart")
 ticker = st.sidebar.text_input("Stock Symbol (e.g., AAPL)", value="AAPL").upper()
 
 # Date range selection
-start_date = st.sidebar.date_input("Start Date", pd.to_datetime("2022-01-01"))
-end_date = st.sidebar.date_input("End Date", pd.to_datetime("2022-12-31"))
+start_date = st.sidebar.date_input("Start Date", pd.to_datetime("2023-10-30"))
+end_date = st.sidebar.date_input("End Date", pd.to_datetime("2023-11-03"))
+
+# Interval selection
+intervalv = st.sidebar.text_input("Interval (e.g., '1d' for daily, '1h' for hourly, '1m' for 1 minute etc.)", value="1m")
 
 # Fetch data from Yahoo Finance
-data = yf.download(ticker, start=start_date, end=end_date)
+data = yf.download(ticker, start=start_date, end=end_date, interval=intervalv)
 
 # Check if data is empty
 if data.empty:
@@ -30,9 +33,8 @@ else:
     # Set the chart data
     chart.set(data)
 
-    #watrmark
+    # Watermark
     chart.watermark(ticker)
-
 
     # Load and display the chart
     chart.load()
