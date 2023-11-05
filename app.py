@@ -4,7 +4,7 @@ import streamlit as st
 import yfinance as yf
 
 # Set Streamlit page configuration to full width
-st.set_page_config(layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(layout="wide", initial_sidebar_state="expanded", theme="dark")
 
 st.sidebar.header("Financial Chart")
 
@@ -60,4 +60,3 @@ else:
         }
         </style>
         """, unsafe_allow_html=True)
-
