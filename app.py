@@ -81,31 +81,31 @@ df = calculate_macd(df)
 # Set Streamlit page configuration to full width
 # st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 # Set the theme properties
-st.set_page_config(
-    layout="wide", initial_sidebar_state="expanded",
-    page_title="Your App Title",
-    page_icon=":chart_with_upwards_trend:"
-)
+# st.set_page_config(
+#     layout="wide", initial_sidebar_state="expanded",
+#     page_title="Your App Title",
+#     page_icon=":chart_with_upwards_trend:"
+# )
 
 # Customize theme colors and fonts
-st.markdown(
-    """
-    <style>
-    body {
-        background-color: #F0FF33;  /* Background color */
-        color: #03080C;  /* Text color */
-        font-family: sans-serif;  /* Font */
-    }
-    .stButton > button {
-        background-color: #F36295;  /* Primary button color */
-    }
-    .css-1egp28t {
-        background-color: #3183D1;  /* Secondary button color */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+# st.markdown(
+#     """
+#     <style>
+#     body {
+#         background-color: #F0FF33;  /* Background color */
+#         color: #03080C;  /* Text color */
+#         font-family: sans-serif;  /* Font */
+#     }
+#     .stButton > button {
+#         background-color: #F36295;  /* Primary button color */
+#     }
+#     .css-1egp28t {
+#         background-color: #3183D1;  /* Secondary button color */
+#     }
+#     </style>
+#     """,
+#     unsafe_allow_html=True,
+# )
 
 st.sidebar.header("Financial Chart")
 
