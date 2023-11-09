@@ -6,4 +6,4 @@ qtpy
 PyGObject
 #PyQt5==5.15.10 
 pywebview==4.3.3
-pip install pygobject
+pygobject
