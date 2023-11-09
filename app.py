@@ -79,13 +79,13 @@ df = calculate_macd(df)
 
 
 # Set Streamlit page configuration to full width
-# st.set_page_config(layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 # Set the theme properties
-st.set_page_config(
-    layout="wide", initial_sidebar_state="expanded",
-    page_title="Your App Title",
-    page_icon=":chart_with_upwards_trend:"
-)
+# st.set_page_config(
+#     layout="wide", initial_sidebar_state="expanded",
+#     page_title="Your App Title",
+#     page_icon=":chart_with_upwards_trend:"
+# )
 
 # Customize theme colors and fonts
 st.markdown(
