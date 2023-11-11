@@ -3,7 +3,7 @@ pandas
 streamlit
 yfinance
 qtpy
-PyGObject
+#PyGObject
 #PyQt5==5.15.10 
 pywebview==4.3.3
-pygobject
+#pygobject
