@@ -3,8 +3,6 @@ from lightweight_charts.widgets import StreamlitChart
 import streamlit as st
 import yfinance as yf
 from datetime import datetime, timezone, timedelta
-
-            
             
 
 
@@ -63,8 +61,9 @@ def calculate_macd(df, short_window=12, long_window=26, signal_window=9):
     return df
 
 
-df = pd.read_csv('data/ohlcv.csv')
-df = df.rename(columns={"Datetime": "time", "Open": "open", "High": "high", "Low": "low", "Close": "close","Volume": "volume"})
+df = pd.read_csv('ohlcv.csv')
+print(df)
+df = df.rename(columns={"timestamp": "time", "Open": "open", "High": "high", "Low": "low", "Close": "close","Volume": "volume"})
 # Convert the 'timestamp' column to a datetime object
 df['time'] = pd.to_datetime(df['time'], utc=True)
 df['time'] = df['time'] - timedelta(hours=5)
@@ -81,31 +80,31 @@ df = calculate_macd(df)
 # Set Streamlit page configuration to full width
 # st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 # Set the theme properties
-# st.set_page_config(
-#     layout="wide", initial_sidebar_state="expanded",
-#     page_title="Your App Title",
-#     page_icon=":chart_with_upwards_trend:"
-# )
+st.set_page_config(
+    layout="wide", initial_sidebar_state="expanded",
+    page_title="Your App Title",
+    page_icon=":chart_with_upwards_trend:"
+)
 
 # Customize theme colors and fonts
-# st.markdown(
-#     """
-#     <style>
-#     body {
-#         background-color: #F0FF33;  /* Background color */
-#         color: #03080C;  /* Text color */
-#         font-family: sans-serif;  /* Font */
-#     }
-#     .stButton > button {
-#         background-color: #F36295;  /* Primary button color */
-#     }
-#     .css-1egp28t {
-#         background-color: #3183D1;  /* Secondary button color */
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True,
-# )
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #F0FF33;  /* Background color */
+        color: #03080C;  /* Text color */
+        font-family: sans-serif;  /* Font */
+    }
+    .stButton > button {
+        background-color: #F36295;  /* Primary button color */
+    }
+    .css-1egp28t {
+        background-color: #3183D1;  /* Secondary button color */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.sidebar.header("Financial Chart")
 
